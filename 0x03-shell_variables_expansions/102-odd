@@ -1,2 +1,2 @@
 #!/bin/bash
-sed -n 'p;n'
+cat -n | grep [13579][[:space:]] | cut -f2
