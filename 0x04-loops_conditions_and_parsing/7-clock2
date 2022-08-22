@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# display
+h="0";
+while [ "$h" -ne 13 ]
+do
+	m="1";
+	echo "Hour: $h";
+	while [ "$m" -ne 60 ]; do
+		echo "$m";
+		((m++));
+	done
+	((h++));
+done;
