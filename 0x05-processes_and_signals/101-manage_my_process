@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #Bash script that creates a subprocess
-./etc/init.d/101-manage_my_process
 
+. /lib/lsb/init-functions
 PIDFILE=/var/run/my_process.pid
 
 start() {
@@ -28,7 +28,7 @@ case "$1" in
        echo "manage_my_process restarted"
        ;;
     *)
-       echo "Usage: \"$0\" {start|stop|restart}">&2
+       echo "Usage: manage_my_process {start|stop|restart}">&2
 esac
 
 exit 0
