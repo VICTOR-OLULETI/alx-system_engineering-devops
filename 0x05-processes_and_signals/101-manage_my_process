@@ -6,7 +6,7 @@ PIDFILE=/var/run/my_process.pid
 
 start() {
     ./manage_my_process &
-    echo "$$" > "$PIDFILE"
+    echo "$!" > "$PIDFILE"
 }
 
 stop() {
@@ -28,7 +28,7 @@ case "$1" in
        echo "manage_my_process restarted"
        ;;
     *)
-       echo "Usage: \"$0\" {start|stop|restart}"
+       echo "Usage: \"$0\" {start|stop|restart}">&2
 esac
 
 exit 0
