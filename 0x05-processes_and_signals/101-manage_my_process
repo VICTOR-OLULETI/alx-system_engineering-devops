@@ -6,7 +6,7 @@ PIDFILE=/var/run/my_process.pid
 
 start() {
     ./manage_my_process &
-    echo "$!" > "$PIDFILE"
+    echo "$$" > "$PIDFILE"
 }
 
 stop() {
