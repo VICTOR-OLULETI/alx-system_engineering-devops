@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# display all IPv4 IP addresses
+# Extracting lines that match the following pattern 
+ip=$(ip address| awk '/inet/ {print $2}' | grep -v "^.*\::" | cut -d "/" -f1)
+echo "$ip"
