@@ -1,0 +1,11 @@
+## WEB INFRASTRUCTURE
+# We added: 2 servers, 1 web server, 1 application server, 1 load balancer, 1 set of application files (code base) and 1 database.
+
+The load balancer used is the HAproxy which uses TCP loader balancer. This is suitable fo high traffic websites.
+
+Traffic is distributed to the server via server configured for load balancing. It is a url based load balancing, applied at the network and application layer. The algorithm used include round robin(each load balancing server is assigned requests in turn using a static sequence), least connection(new requests are assigned to the server having the fewest current connection requests), source(new requests are assigned to the server that previously responded to the same client). The most commonly used and used algorithm above by load balancers is least pending requests(LPR).
+
+Multi node topology ensures resiliency through redundancy, hence active nodes keep service running during a server failure. The HAProxy is a single point of failure
+
+The active-passive configuration setup recognizes a failed node and redirects traffic to the next available node.
+The active-active configuration setup spreads the workload’s traffic among multiple node. In the above, an active-active configuration is setup.
