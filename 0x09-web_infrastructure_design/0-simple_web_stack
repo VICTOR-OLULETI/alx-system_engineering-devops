@@ -1,0 +1,19 @@
+## WEB INFRASTURE
+The server hosts the website that is reachable via www.foobar.com
+
+The url www.foobar.com is entered by the user into the browser. The browser and OS checks it cache for a record of the url in order to get its ip address. If not found the OS  connects to the resolver(Internet Service Provider) then to the root server then to .com Top-level domain server then to the authoritative name servers for the domain foobar.com. At this stage the ip address is found and sent to the browser.
+The browser through the help of the DNS gets the ip address and connects to the web server via the internet, sending requests for the page via http to the web server.
+Once the http request is received by the web server, it checks it’s code base(static Database) for the web page requested.
+If found it would send an http response back to the browser with the requested web page.
+If the web page is not found at the code base, the request is forwarded to the application server. It processes the request and checks its database for the information.
+If found it is send to the web page, then the web page sends it back to the browser else it returns a 404 error page, stating the web page requested could not be found.
+First, a server is a hardware and/or software that provides data and services to other computers via a network.
+Second, the domain name is used for easy use and remembrance which then converted by the DNS to ip address and used by the browser to establish connection
+Third, an A record is created at DNSimple.comwhich maps the domain name to its ip address, in this case www.foobar.com is mapped to 8.8.8.8
+Fourth, the job of the web server is to provide services for  hosting and managing websites.
+Fifth, the applicationg server runs applications/ provides environment to run application requested by the user since the web server is solely for the purpose of retrieving web pages.
+Sixth, the database is a collection of data that is organized. This allows to perform more operations(retrieving and storing) on the records/data stored faster.
+Seventh, the server is communicating with the computer using http protocol 
+
+
+This architecture described above as SPOF (single point fo failure). If the single server used is down, the whole system stops. It can also not handle high traffic without overloading the server.
