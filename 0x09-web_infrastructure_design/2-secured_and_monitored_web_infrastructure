@@ -1,0 +1,15 @@
+## WEB INFRASTRUCTURE
+# ADDED: 3 firewalls, 1 SSL certificate, 3 monitoring clients
+
+A firewall is a division between private network and an outer network(the internet) that manages traffic passing between the two networks. It allows, limits, and block network traffic based on preconfigured rules in the hardware or software, data packets that request entry to the network.
+
+Traffic is served over HTTPS to encrypt communication using SSL(Secure Sockets Layer)
+
+Monitoring watches computer metrics, record them and emit an alert if something is wrong
+
+The monitoring tool is collecting data  via application monitoring and server monitoring.
+
+To monitor web server we use Server monitoring, getting data from virtual or physical server. To monitor the web server QPS(query per second)I would apply WaveFront monitoring service
+
+
+Terminating SSL at the load balancer level is an issue if there is a sudden spike in traffic, it won’t be able to capture it.
