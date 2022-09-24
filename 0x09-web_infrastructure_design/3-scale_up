@@ -1,0 +1,3 @@
+## WEB INFRASTRUCTURE
+# I added an extra load balancer
+We added an extra load balancer to avoid SPOF(single point fo failure at the load balancing point). The load balancers work in active-passive configuration setup
