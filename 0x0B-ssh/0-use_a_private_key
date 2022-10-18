@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
+# using ssh to connect to your server using private key
 cat ~/.ssh/school | ssh ubuntu@44.210.78.253 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
