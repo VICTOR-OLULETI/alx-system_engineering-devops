@@ -8,5 +8,5 @@ else
   user=$3
   ip=$2
   pathkey=$4
-  scp -i "${pathkey}" "${path}" "${user}"@"${ip}":~
+  scp -o StrictHostKeyChecking=no -i "${pathkey}" "${path}" "${user}"@"${ip}":~
 fi
