@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Install nginx and create redirect directory
-# (exec "./1-install_nginx_web_server")
 apt-get -y update
 apt-get -y ugrade
 apt install -y nginx
