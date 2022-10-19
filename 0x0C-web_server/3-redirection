@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Install nginx and create redirect directory
 # (exec "./1-install_nginx_web_server")
-sudo apt-get -y update
-sudo apt-get -y ugrade
-sudo apt install -y nginx
+apt-get -y update
+apt-get -y ugrade
+apt install -y nginx
 echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
-sudo sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com\/watch\?v\=QH2\-TGUlwu4 permanent;/g" /etc/nginx/sites-enabled/default
+sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com\/watch\?v\=QH2\-TGUlwu4 permanent;/g" /etc/nginx/sites-enabled/default
 sudo service nginx start
