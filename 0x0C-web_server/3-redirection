@@ -1,16 +1,9 @@
 #!/usr/bin/env bash
 # Install nginx and create redirect directory
+# (exec "./1-install_nginx_web_server")
 sudo apt-get -y update
 sudo apt-get -y ugrade
 sudo apt install -y nginx
-sudo mkdir -p /var/www/html/redirect_me
-sudo chown -R $USER:$USER /var/www/html/redirect_me
-sudo chmod -R 755 /var/www
-sudo touch /var/www/html/redirect_me/index.html
-#echo "Hi" | sudo tee /var/www/html/redirect_me/index.html
-new_string="HTTP/1.1 301 Moved Permanently\nServer: nginx/1.4.6 (Ubuntu)\nDate: Tue, 21 Feb 2017 21:36:04 GMT\nContent-Type: text/html\nContent-Length: 193\nConnection: keep-alive\nLocation: https://www.youtube.com/watch?v=QH2-TGUlwu4"
-# echo "$new_string" | sudo tee /var/www/html/redirect_me/index.html
-# sudo sed -i "s/Hi/$new_string/" /var/www/html/redirect_me/index.html
-echo -e $new_string | sudo tee /var/www/html/redirect_me/index.html
+echo "Helloi World!" | sudo tee /var/www/html/index.nginx-debian.html
+sudo sed -i "s/server_name _;/server_name _;\nrewrite ^\/redirect_me\/*$ https:\/\/www.youtube.com\/watch\?v\=QH2\-TGUlwu4 permanent;/g" /etc/nginx/sites-enabled/default
 sudo service nginx start
-echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
