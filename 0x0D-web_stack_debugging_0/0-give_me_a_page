@@ -1,0 +1,2 @@
+docker ps
+docker exec -i 47ca3994a491 curl 0:8080
