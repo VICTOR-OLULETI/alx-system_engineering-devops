@@ -4,4 +4,4 @@
 # netstat -lpn
 # ps auxf
 # docker exec -ti 47ca3994a491 /bin/bash
-# docker exec -i 47ca3994a491 curl 0:8080
+docker exec -i 47ca3994a491 curl 0:8080
