@@ -6,5 +6,5 @@ sudo apt-get update -y
 sudo apt-get install haproxy -y
 # sudo cp -a /etc/haproxy/haproxy.cfg{,.orig}
 echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
-echo -e "\nfrontend haproxy-main\n\tbind *:80\n\toption forward for\n\tdefault_backend apache_webservers\n\nbackend apache_webservers\n\tbalance roundrobin\n\tserver 46952-web-01 44.210.78.253:80 check\n\tserver 46952-web-02 54.160.124.52:80 check" | sudo tee -a /etc/haproxy/haproxy.cfg
+echo -e "\nfrontend haproxy-main\n\tbind *:80\n\tmode http\n\tdefault_backend web-backend\n\nbackend web-backend\n\tbalance roundrobin\n\tserver 46952-web-01 44.210.78.253:80 check\n\tserver 46952-web-02 54.160.124.52:80 check" | sudo tee -a /etc/haproxy/haproxy.cfg
 sudo service haproxy restart
