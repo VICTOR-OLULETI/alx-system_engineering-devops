@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # configure Nginx so that its HTTP response contains a custom header named X-Served-By
-# Install nginx and create redirect directory
 sudo apt-get -y update
 sudo apt-get -y upgrade
 sudo apt install -y nginx
