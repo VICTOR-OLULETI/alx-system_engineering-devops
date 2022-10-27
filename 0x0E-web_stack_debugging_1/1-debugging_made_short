@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# web stack debugging solution
+sudo sed -E -i 's/[:, ][0-9]+ / 80 /' /etc/nginx/sites-enabled/default
+sudo service nginx restart
+sudo service nginx stop
