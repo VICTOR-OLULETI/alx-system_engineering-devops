@@ -1,10 +1,24 @@
 #!/usr/bin/env bash
 # Install and configure HAproxy on my lb-01 server
-sudo apt-get install software-properties-common
-sudo add-apt-repository ppa:vbernat/haproxy-2.5 -y
+#sudo apt-get install software-properties-common
+#sudo add-apt-repository ppa:vbernat/haproxy-2.5 -y
+#sudo apt-get update -y
+#sudo apt-get install haproxy -y
+# sudo cp -a /etc/haproxy/haproxy.cfg{,.orig}
+#echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+#echo -e "\nfrontend haproxy-main\n\tbind *:80\n\tmode http\n\tdefault_backend web-backend\n\nbackend web-backend\n\tbalance roundrobin\n\tserver 46952-web-01 54.197.82.68:80 check\n\tserver 46952-web-02 54.237.1.122:80 check" | sudo tee -a /etc/haproxy/haproxy.cfg
+#sudo service haproxy restart
+
+# Install HAproxy
 sudo apt-get update -y
 sudo apt-get install haproxy -y
-# sudo cp -a /etc/haproxy/haproxy.cfg{,.orig}
+#Configure HAproxy
+echo -e "\nfrontend http-in\n\tbind *:80\n\tdefault_backend servers\n\nbackend servers\n\tbalance roundrobin\n\tserver 46952-web-01 54.197.82.68:80 check\n\tserver 46952-web-02 54.237.1.122:80 check" | sudo tee -a /etc/haproxy/haproxy.cfg
+# Verify Configuration
+sudo haproxy -f /etc/haproxy/haproxy.cfg -c
+# Enable HAproxy to be manages by an init script
 echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
-echo -e "\nfrontend haproxy-main\n\tbind *:80\n\tmode http\n\tdefault_backend web-backend\n\nbackend web-backend\n\tbalance roundrobin\n\tserver 46952-web-01 44.210.78.253:80 check\n\tserver 46952-web-02 54.160.124.52:80 check" | sudo tee -a /etc/haproxy/haproxy.cfg
+# Restart HAproxy to apply changes
 sudo service haproxy restart
+# Configure the hostnames of my web servers
+echo -e "\n54.197.82.68 46952-web-01\n54.237.1.122 46952-web-02" | sudo tee -a /etc/hosts

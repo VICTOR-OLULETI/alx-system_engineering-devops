@@ -12,4 +12,4 @@ echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/custom_404.html 
 sudo sed -i "s/# SSL configuration/\terror_page 404 \/custom_404.html;\n\tlocation = \/custom_404.html \{\n\troot \/usr\/share\/nginx\/html;\n\tinternal;\n\t\}\n\t# SSL configuration/" /etc/nginx/sites-enabled/default
 sudo sed -i 's/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc\/nginx\/sites-enabled\/\*;\n\tadd_header X-Served-By ${HOSTNAME};/' /etc/nginx/nginx.conf
 #sudo sed -i "s/# SSL configuration/\tadd_header X-Served-By \$hostname;\n\t# SSL configuration/" /etc/nginx/sites-enabled/default
-sudo service nginx start
+sudo service nginx restart
