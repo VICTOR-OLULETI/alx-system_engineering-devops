@@ -26,21 +26,21 @@
 #}
 
 exec {'update':
-    command  => 'sudo apt-get -y install nginx',
-    before   => Exec['install Nginx'],
+  command => 'sudo apt-get -y install nginx',
+  before  => Exec['install Nginx'],
 }
 
 exec {'install Nginx':
-    command  => 'sudo apt-get -y install nginx',
-    before   => Exec['add_header'],
+  command => 'sudo apt-get -y install nginx',
+  before  => Exec['add_header'],
 }
 
 exec {'add_header':
-    environment => ["HOST=${HOSTNAME}"],
-    command     => 'sudo sed -i "s/# SSL configuration/\tadd_header X-Served-By \$hostname;\n\t# SSL configuration/" /etc/nginx/sites-enabled/default',
-    before      => Exec['start Nginx'],
+  environment => ["HOST=${HOSTNAME}"],
+  command     => 'sudo sed -i "s/# SSL configuration/\tadd_header X-Served-By \$hostname;\n\t# SSL configuration/" /etc/nginx/sites-enabled/default',
+  before      => Exec['start Nginx'],
 }
 
 exec { 'start Nginx':
-    command     => 'sudo service nginx start',
+  command     => 'sudo service nginx start',
 }
