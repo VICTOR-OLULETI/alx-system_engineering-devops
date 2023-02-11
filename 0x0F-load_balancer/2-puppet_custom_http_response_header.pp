@@ -38,9 +38,9 @@ exec {'install Nginx':
 exec {'add_header':
     environment => ["HOST=${HOSTNAME}"],
     command     => 'sudo sed -i "s/# SSL configuration/\tadd_header X-Served-By \$hostname;\n\t# SSL configuration/" /etc/nginx/sites-enabled/default',
-    before      => Exec['restart Nginx'],
+    before      => Exec['start Nginx'],
 }
 
-exec { 'restart Nginx':
-    command     => 'sudo service nginx restart',
+exec { 'start Nginx':
+    command     => 'sudo service nginx start',
 }
