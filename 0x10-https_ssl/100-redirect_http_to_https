@@ -8,7 +8,7 @@ global
 	group haproxy
 	daemon
 	maxconn 2048
-	tune.ssl.default-dh-para 2048
+	tune.ssl.default-dh-param 2048
 
 	# Default SSL material locations
 	ca-base /etc/ssl/certs
@@ -37,23 +37,22 @@ defaults
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
 
-frontend www-http
+frontend http-in
         bind *:80
-        option forwardfor
-        default_backend www-backend
-	
-frontend www-https
-        bind *:443 ssl crt /etc/haproxy/certs/www.myschoolcenter.tech.pem
+        default_backend servers
+
+frontend https-in
+        bind *:443 ssl crt /etc/ssl/www.myschoolcenter.tech/www.schoolcenter.tech.pem
+        #key /etc/letsencrypt/live/www.myschoolcenter.tech/privkey.pem
         acl letsencrypt-acl path_beg /.well-known/acme-challenge/
         use_backend letsencrypt-backend if letsencrypt-acl
-        default_backend www-backend
+        default_backend servers
 
-backend www-backend
+backend servers
         balance roundrobin
 	redirect scheme https code 301 if !{ ssl_fc }
-        server 46952-web-01 44.210.78.253:80 check
-        server 46952-web-02 54.160.124.52:80 check
-	
+        server 46952-web-01 54.197.82.68:80 check
+        server 46952-web-02 54.237.1.122:80 check
+
 backend letsencrypt-backend
-        server letsencrypt 127.0.0.1:54321
-                                                    58,7-14       Bot
+        server letsencrypt 127.0.0.1:8888
