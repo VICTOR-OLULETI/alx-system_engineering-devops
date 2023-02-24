@@ -6,7 +6,7 @@ sudo service nginx stop
 sudo sed -i 's/80/8080/g' /etc/nginx/sites-enabled/default
 
 # update nginx user in nginx.conf file
-sudo sed -i 's/user www-data;/user ngnix;/g' /etc/nginx/nginx.conf
+sudo sed -i 's/#user www-data;/user ngnix;/' /etc/nginx/nginx.conf
 
 # Restart nginx
 sudo service nginx start
