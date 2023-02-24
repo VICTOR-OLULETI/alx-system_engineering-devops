@@ -2,11 +2,16 @@
 # configure nginx to be running as nginx user
 # configures nginx to listening on all active IPs on port 8080
 
-sudo service nginx stop
-sudo sed -i "s/listen\s*80;/listen 8080;/g" /etc/nginx/sites-enabled/default
+#sudo service nginx stop
+#sudo sed -i "s/listen\s*80;/listen 8080;/g" /etc/nginx/sites-enabled/default
 
 # update nginx user in nginx.conf file
-sudo sed -i "s/#user www-data/user ngnix/" /etc/nginx/nginx.conf
+#sudo sed -i "s/#user www-data/user ngnix/" /etc/nginx/nginx.conf
 
 # Restart nginx
-sudo systemctl restart nginx.service
+#sudo systemctl restart nginx.service
+chmod 777 /etc/nginx/nginx.conf
+sed -i "s/80/8080/g" /etc/nginx/sites-available/default
+sed -i "s/#user www-data/user nginx/" /etc/nginx/nginx.conf
+pkill -9 apache
+su nginx -c "service nginx restart"
