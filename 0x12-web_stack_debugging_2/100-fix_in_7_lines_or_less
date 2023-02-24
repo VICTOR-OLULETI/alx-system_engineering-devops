@@ -4,7 +4,7 @@
 
 sudo service nginx stop
 chmod 777 /etc/nginx/nginx.conf
-sudo sed -i "s/listen\s*80;/listen 8080;/g" /etc/nginx/sites-enabled/default
+sudo sed -i "s/listen\s*80/listen 8080/g" /etc/nginx/sites-enabled/default
 # update nginx user in nginx.conf file
 sudo sed -i "s/user www-data/user ngnix/" /etc/nginx/nginx.conf
 # Restart nginx
