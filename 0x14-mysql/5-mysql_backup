@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 #generates a mysql dump and creates a compressed archive out of it
 date=$(date +%d-%m-%Y)
 filename="$date.tar.gz"
