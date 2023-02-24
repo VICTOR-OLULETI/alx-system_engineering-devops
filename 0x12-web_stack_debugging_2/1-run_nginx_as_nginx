@@ -3,7 +3,7 @@
 # configures nginx to listening on all active IPs on port 8080
 
 sudo service nginx stop
-sudo sed -i 's/80/8080/g' /etc/nginx/sites-enabled/default
+sudo sed -i "s/80/8080/g" /etc/nginx/sites-enabled/default
 
 # update nginx user in nginx.conf file
 sudo sed -i "s/user www-data;/user ngnix;/" /etc/nginx/nginx.conf
