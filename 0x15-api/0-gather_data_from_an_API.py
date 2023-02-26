@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" This module uses the REST API for a given employee ID"""
+""" Script that uses JSONPlaceholder API to get information about employee """
 import requests
 import sys
 
@@ -10,7 +10,7 @@ def get_employee_todo_list(employee_id):
 
         Args:
         employee_id (int): The ID of the employee.
-        
+
         Returns:
         str: A string containing the employee TODO list progress
     """
