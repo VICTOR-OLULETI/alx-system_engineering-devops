@@ -2,8 +2,8 @@
 """ This script exports data in json format """
 import csv
 import json
-import sys
 import requests
+import sys
 
 
 def get_employee_todo_list(employee_id):
