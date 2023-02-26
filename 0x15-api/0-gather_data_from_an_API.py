@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-""" This module uses the REST API for a given employee ID
-    returns information about his/her TODO list progress
-"""
+""" This module uses the REST API for a given employee ID"""
 import requests
 import sys
 
