@@ -5,15 +5,6 @@ import sys
 
 
 def get_employee_todo_list(employee_id):
-    """ This function accepts the employee_id and returns
-        the employee information
-
-        Args:
-        employee_id (int): The ID of the employee.
-
-        Returns:
-        str: A string containing the employee TODO list progress
-    """
     url = 'https://jsonplaceholder.typicode.com/todos?userId=' + employee_id
     response = requests.get(url)
     todos = response.json()
