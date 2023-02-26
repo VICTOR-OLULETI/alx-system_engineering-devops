@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-""" This module exports data in the CSV format """
-import csv
+""" This module uses the REST API for a given employee ID"""
 import requests
 import sys
 
@@ -11,7 +10,7 @@ def get_employee_todo_list(employee_id):
 
         Args:
         employee_id (int): The ID of the employee.
-
+        
         Returns:
         str: A string containing the employee TODO list progress
     """
@@ -26,32 +25,13 @@ def get_employee_todo_list(employee_id):
     response = requests.get(url)
     employee = response.json()
     employee_name = employee['name']
-    username = employee['username']
-    userid = todos[0]['userId']
-    filename = '{}.csv'.format(userid)
     # print the report
-    with open(filename, mode='w', newline="") as f:
-        # create a writer object
-        writer = csv.writer(f,
-                            delimiter=',',
-                            quotechar='"',
-                            quoting=csv.QUOTE_ALL)
-
-        # Write the data rows
-        # userId,id,title,completed
-        for row in todos:
-            temp = []
-            user_id = row.get("userId")
-            user_title = row.get("title")
-            completed = row.get("completed")
-            temp.append(user_id)
-            temp.append(username)
-            temp.append(completed)
-            temp.append(user_title)
-            writer.writerow(temp)
+    print("Employee {} is done with tasks({}/{}):".format(
+        employee_name, num_done_tasks, num_total_tasks))
+    for task_title in completed_tasks:
+        print(f"\t {task_title}")
 
 
 if __name__ == "__main__":
     employee_id = sys.argv[1]
     get_employee_todo_list(employee_id)
-    print("Data written to output.csv")
