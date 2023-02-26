@@ -27,10 +27,15 @@ def get_employee_todo_list(employee_id):
     employee = response.json()
     employee_name = employee['name']
     username = employee['username']
+    userid = todos[0]['userId']
+    filename = '{}.csv'.format(userid)
     # print the report
-    with open("output.csv", mode='w+', newline="") as f:
+    with open(filename, mode='w+', newline="") as f:
         # create a writer object
-        writer = csv.writer(f)
+        writer = csv.writer(f,
+                            delimiter=',',
+                            quotechar='"',
+                            quoting=csv.QUOTE_ALL)
 
         # Write the data rows
         # userId,id,title,completed
