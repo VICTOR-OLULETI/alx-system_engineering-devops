@@ -6,22 +6,20 @@ import requests
 import sys
 
 
-if __name__ == "__main__": 
+if __name__ == "__main__":
     dict1 = {}
-    for i in range(1, 9, 1):
-        employee_id = str(i)
-        url = 'https://jsonplaceholder.typicode.com/todos?userId=' + employee_id
-        response = requests.get(url)
+    url = 'https://jsonplaceholder.typicode.com/todos'
+    response = requests.get(url)
+    data = response.json()
+    users = set([t['userId'] for t in data])
+    for i in users:
+        userid = str(i)
+        url1 = 'https://jsonplaceholder.typicode.com/todos?userId=' + userid
+        response = requests.get(url1)
         todos = response.json()
-    # print(todos)
-        num_total_tasks = len(todos)
-        completed_tasks = [todo['title'] for todo in todos if todo['completed']]
-        num_done_tasks = len(completed_tasks)
-        url = 'https://jsonplaceholder.typicode.com/users/' + employee_id
+        url = 'https://jsonplaceholder.typicode.com/users/' + userid
         response = requests.get(url)
         employee = response.json()
-        employee_name = employee['name']
-        userid = str(todos[0]['userId'])
         usernames = employee['username']
         temp_list = []
         temp_dict = {}
@@ -33,5 +31,5 @@ if __name__ == "__main__":
         dict1[userid] = temp_list
 
     filename = 'todo_all_employees.json'
-    with open(filename, 'a') as f:
+    with open(filename, 'w') as f:
         json.dump(dict1, f)
