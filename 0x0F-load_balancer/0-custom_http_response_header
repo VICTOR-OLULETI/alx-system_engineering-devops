@@ -6,8 +6,6 @@ sudo apt install -y nginx
 # Overwrite the default page to display Hello World
 echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html > /dev/null
 # add a redirect_me configuration
-
-#sudo sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com\/watch\?v\=QH2\-TGUlwu4 permanent;/g" /etc/nginx/sites-enabled/default
 sudo sed -i "s/# SSL configuration/\tlocation \/redirect_me \{\n\t\treturn 301 https:\/\/www.youtube.com;\n\t\}\n\t# SSL configuration/" /etc/nginx/sites-enabled/default
 
 # Create a custom error page called custom_404
@@ -15,11 +13,8 @@ sudo touch /usr/share/nginx/html/custom_404.html
 # the custom_404 to displays Ceci n'est past une page
 echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/custom_404.html > /dev/null
 # modify the configuration file for the custom_404 page
-
-#sudo sed -i 's/index.nginx-debian.html;/index.nginx-debian.html;\n\terror_page 404 \/custom_404.html;\n\tlocation \= \/custom_404.html \{\n\t\troot \/usr\/share\/nginx\/html;\n\t\tinternal;\n\t\}/' /etc/nginx/sites-enabled/default
 sudo sed -i "s/# SSL configuration/\terror_page 404 \/custom_404.html;\n\tlocation = \/custom_404.html \{\n\troot \/usr\/share\/nginx\/html;\n\tinternal;\n\t\}\n\t# SSL configuration/" /etc/nginx/sites-enabled/default
 # Create a custom header that also shows the hostname
-#sudo sed -i 's/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc\/nginx\/sites-enabled\/\*;\n\tadd_header X-Served-By ${HOSTNAME};/' /etc/nginx/nginx.conf
 sudo sed -i "s/# SSL configuration/\tadd_header X-Served-By \$hostname;\n\t# SSL configuration/" /etc/nginx/sites-enabled/default
 # Restart the nginx service
-sudo service nginx reload
+sudo service nginx start
