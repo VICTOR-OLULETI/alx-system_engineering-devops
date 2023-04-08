@@ -51,8 +51,8 @@ frontend https-in
 backend servers
         balance roundrobin
 	redirect scheme https code 301 if !{ ssl_fc }
-        server 46952-web-01 54.197.82.68:80 check
-        server 46952-web-02 54.237.1.122:80 check
+        server 46952-web-01 35.153.232.12:80 check
+        server 46952-web-02 18.234.253.65:80 check
 
 backend letsencrypt-backend
         server letsencrypt 127.0.0.1:8888
