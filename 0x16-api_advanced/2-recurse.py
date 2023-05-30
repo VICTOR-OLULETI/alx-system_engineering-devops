@@ -33,3 +33,8 @@ def recurse(subreddit, hot_list=[]):
     params = {'limit': 100}
     hot_list = recurse_temp(subreddit, hot_list, params)
     return (hot_list)
+
+if __name__ == "__main__":
+    """ call function """
+    subreddit = sys.argv[1]
+    recurse(subreddit)
