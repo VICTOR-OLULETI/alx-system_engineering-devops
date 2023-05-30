@@ -5,7 +5,13 @@ import sys
 
 
 def recurse_temp(subreddit, hot_list=[], params={}):
-    """ recurse temp """
+    """ recurse temp, this function helps to perform the recursion
+        Variables: subreddit - chosen subreddit by user input
+                    hot_list - contains the list of the hot
+                            posts of the subreddit
+                    params  - stores the param to check if it has the
+                            the after property.
+    """
     headers = {
         'User-Agent': 'vickey'
     }
@@ -29,10 +35,13 @@ def recurse(subreddit, hot_list=[]):
     """ This function returns a list containing the titles
         of all hot articles for a given subreddit.
         Pagination is used for separating pages of responses.
+        Variables: subreddit - subreddit chosen by user
+                    hot_list - contains the list of titles of hot articles
     """
     params = {'limit': 100}
     hot_list = recurse_temp(subreddit, hot_list, params)
     return (hot_list)
+
 
 if __name__ == "__main__":
     """ call function """
