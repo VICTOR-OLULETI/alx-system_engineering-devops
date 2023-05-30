@@ -4,46 +4,36 @@ import requests
 import sys
 
 
-def recurse_temp(subreddit, hot_list=[], params={}):
+def recurse(subreddit, hot_list=[], after=None):
     """ recurse temp, this function helps to perform the recursion
         Variables: subreddit - chosen subreddit by user input
                     hot_list - contains the list of the hot
                             posts of the subreddit
-                    params  - stores the param to check if it has the
-                            the after property.
+                    after - to check if there is more on another page
     """
     headers = {
         'User-Agent': 'vickey'
     }
-    url = f'https://reddit.com/r/{subreddit}/hot.json'
-    response = requests.get(url, headers=headers, params=params)
-    if not response:
+
+    params = {
+        'after': after
+            }
+    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
+    response = requests.get(
+        url, headers=headers,
+        params=params,
+        allow_redirects=False)
+
+    if response.status_code != 200:
         return (None)
+
     response = response.json()
     posts = response['data']['children']
 
     for post in posts:
         title = post['data']['title']
         hot_list.append(title)
-    if 'after' in response['data']:
-        params['after'] = response['data']['after']
-        recurse_temp(subreddit, hot_list, params)
+    after = response['data']['after']
+    if after:
+        recurse(subreddit, hot_list, after)
     return hot_list
-
-
-def recurse(subreddit, hot_list=[]):
-    """ This function returns a list containing the titles
-        of all hot articles for a given subreddit.
-        Pagination is used for separating pages of responses.
-        Variables: subreddit - subreddit chosen by user
-                    hot_list - contains the list of titles of hot articles
-    """
-    params = {'limit': 100}
-    hot_list = recurse_temp(subreddit, hot_list, params)
-    return (hot_list)
-
-
-if __name__ == "__main__":
-    """ call function """
-    subreddit = sys.argv[1]
-    recurse(subreddit)
