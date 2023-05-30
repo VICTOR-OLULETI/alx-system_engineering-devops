@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ This script queries Reddit API """
-import sys
 import requests
+import sys
 
 
 def recurse_temp(subreddit, hot_list=[], params={}):

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ This script queries the reddit api """
-import sys
 import requests
+import sys
 
 
 def number_of_subscribers(subreddit):

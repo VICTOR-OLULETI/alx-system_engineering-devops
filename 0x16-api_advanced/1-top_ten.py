@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ This script queries the Reddit API """
-import sys
 import requests
+import sys
 
 
 def top_ten(subreddit):
