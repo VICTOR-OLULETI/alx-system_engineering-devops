@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 This script queries the reddit api and returns
-the number of subscribers
+the number of subscribers.
 """
 import requests
 import sys
