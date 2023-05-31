@@ -11,7 +11,7 @@ def top_ten(subreddit):
     headers = {
         'User-Agent': 'vickey'
     }
-    url = f'https://reddit.com/r/{subreddit}/hot.json'
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     response = requests.get(url, headers=headers, allow_redirects=False)
     if not response:
         print(None)
@@ -19,11 +19,5 @@ def top_ten(subreddit):
     response = response.json()
     for i, post in enumerate(response['data']['children'][:10], 1):
         title = post['data']['title']
-        print(f"{title}")
+        print("{}".format(title))
     return response
-
-
-if __name__ == "__main__":
-    """ calls the function """
-    subreddit = sys.argv[1]
-    top_ten(subreddit)
