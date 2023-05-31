@@ -11,9 +11,12 @@ def number_of_subscribers(subreddit):
     """ This function returns the numer of subscribers,
         if not valid subreddit, returns 0.
     """
+    u_agent = 'Mozilla/5.0'
+
     headers = {
-        'User-Agent': 'vickey'
+        'User-Agent': u_agent
     }
+
     url = f"https://reddit.com/r/{subreddit}/about.json"
     response = requests.get(url, headers=headers, allow_redirects=False)
     if response.status_code != 200:
