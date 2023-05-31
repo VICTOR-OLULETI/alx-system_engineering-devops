@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-This script queries the reddit api and returns
-the number of subscribers.
+Function that queries the Reddit API and returns
+the number of subscribers for a given subreddit.
 """
 import requests
 import sys
