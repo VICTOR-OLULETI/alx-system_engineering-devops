@@ -12,7 +12,7 @@ def top_ten(subreddit):
         'User-Agent': 'vickey'
     }
     url = f'https://reddit.com/r/{subreddit}/hot.json'
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, allow_redirects=False)
     if not response:
         print(None)
         return (0)
