@@ -33,6 +33,7 @@ def count_words(subreddit, word_list, after=None, counted={}, temp=0):
         title = post['data']['title']
         for word in word_list:
             occur = [i.lower() for i in title.split()]
+            word = word.lower()
             occurrence = len([w for w in occur if w == word])
             if occurrence:
                 if counted.get(word):
