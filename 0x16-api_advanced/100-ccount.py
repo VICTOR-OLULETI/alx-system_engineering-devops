@@ -16,7 +16,6 @@ def count_words(subreddit, word_list, after=None, counted={}, temp=0):
     }
     params = {
         'after': after,
-        #'count': temp,
         'limit': 100
     }
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
@@ -30,15 +29,13 @@ def count_words(subreddit, word_list, after=None, counted={}, temp=0):
 
     response = response.json()
     posts = response['data']['children']
-    # temp += response['data']['dist']
     for post in posts:
         title = post['data']['title']
         for word in word_list:
-            # occurrence = title.lower().count(word)
             occur = [i.lower() for i in title.split()]
+            word = word.lower()
             occurrence = len([w for w in occur if w == word])
             if occurrence:
-                # print(counted)
                 if counted.get(word):
                     counted[word] = counted[word] + occurrence
                 else:
