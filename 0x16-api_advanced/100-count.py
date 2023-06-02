@@ -24,6 +24,14 @@ def get_count(posts, word_list, counted):
     return counted
 
 
+def print_sorted_dict(sorted_dict):
+    if len(sorted_dict) > 0:
+        key, value = sorted_dict.popitem()
+        if key not in ['key', 'reverse']:
+            print("{}: {}".format(key, value))
+        print_sorted_dict(sorted_dict)
+
+
 def count_words(subreddit, word_list, after=None, counted={}, temp=0):
     """ recurse temp, this function helps to perform the recursion
         Variables: subreddit - chosen subreddit by user input
@@ -57,8 +65,6 @@ def count_words(subreddit, word_list, after=None, counted={}, temp=0):
         print("")
         return (0)
     else:
-        sorted_dict = dict(counted.items(), key=lambda x: x[1], reverse=True)
-        for key, value in sorted_dict.items():
-            if key not in ['key', 'reverse']:
-                print("{}: {}".format(key, value))
+        sorted_dict = dict(sorted(counted.items(), key=lambda x: x[1]))
+        print_sorted_dict(sorted_dict)
     return (0)
