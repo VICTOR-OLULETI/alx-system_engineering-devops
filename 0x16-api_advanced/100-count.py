@@ -4,6 +4,26 @@ import requests
 import sys
 
 
+def get_count(posts, word_list, counted):
+    """ goes through the post response and counts the words
+    based on the word list
+    """
+    if len(posts) > 0:
+        post = posts[0]
+        title = post['data']['title']
+        for word in word_list:
+            occur = [i.lower() for i in title.split()]
+            word = word.lower()
+            occurrence = len([w for w in occur if w == word])
+            if occurrence:
+                if counted.get(word):
+                    counted[word] = counted[word] + occurrence
+                else:
+                    counted[word] = occurrence
+        return (get_count(posts[1:], word_list, counted))
+    return counted
+
+
 def count_words(subreddit, word_list, after=None, counted={}, temp=0):
     """ recurse temp, this function helps to perform the recursion
         Variables: subreddit - chosen subreddit by user input
@@ -29,17 +49,7 @@ def count_words(subreddit, word_list, after=None, counted={}, temp=0):
 
     response = response.json()
     posts = response['data']['children']
-    for post in posts:
-        title = post['data']['title']
-        for word in word_list:
-            occur = [i.lower() for i in title.split()]
-            word = word.lower()
-            occurrence = len([w for w in occur if w == word])
-            if occurrence:
-                if counted.get(word):
-                    counted[word] = counted[word] + occurrence
-                else:
-                    counted[word] = occurrence
+    counted = get_count(posts, word_list, counted)
     after = response['data']['after']
     if after:
         count_words(subreddit, word_list, after, counted, temp)
