@@ -4,6 +4,22 @@ import requests
 import sys
 
 
+def wordlist(word_list, title, counted):
+    """ Takes in the word_list and returns the counted words """
+    if len(word_list) > 0:
+        word = word_list[0]
+        occur = [i.lower() for i in title.split()]
+        word = word.lower()
+        occurrence = len([w for w in occur if w == word])
+        if occurrence:
+            if counted.get(word):
+                counted[word] = counted[word] + occurrence
+            else:
+                counted[word] = occurrence
+        wordlist(word_list[1:], title, counted)
+    return counted
+
+
 def get_count(posts, word_list, counted):
     """ goes through the post response and counts the words
     based on the word list
@@ -11,20 +27,13 @@ def get_count(posts, word_list, counted):
     if len(posts) > 0:
         post = posts[0]
         title = post['data']['title']
-        for word in word_list:
-            occur = [i.lower() for i in title.split()]
-            word = word.lower()
-            occurrence = len([w for w in occur if w == word])
-            if occurrence:
-                if counted.get(word):
-                    counted[word] = counted[word] + occurrence
-                else:
-                    counted[word] = occurrence
+        counted = wordlist(word_list, title, counted)
         return (get_count(posts[1:], word_list, counted))
     return counted
 
 
 def print_sorted_dict(sorted_dict):
+    """ Prints the sorted dictionary of words found """
     if len(sorted_dict) > 0:
         key, value = sorted_dict.popitem()
         if key not in ['key', 'reverse']:
