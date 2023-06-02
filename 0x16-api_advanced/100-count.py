@@ -35,10 +35,17 @@ def get_count(posts, word_list, counted):
 def print_sorted_dict(sorted_dict):
     """ Prints the sorted dictionary of words found """
     if len(sorted_dict) > 0:
-        key, value = sorted_dict.popitem()
-        if key not in ['key', 'reverse']:
-            print("{}: {}".format(key, value))
-        print_sorted_dict(sorted_dict)
+        sorted_dict = dict(sorted(
+                sorted_dict.items(),
+                key=lambda x: x[1],
+                reverse=True))
+        for key, value in sorted_dict.items():
+            if key not in ['key', 'reverse']:
+                print("{}: {}".format(key, value))
+        # key, value = sorted_dict.popitem()
+        # if key not in ['key', 'reverse']:
+        #    print("{}: {}".format(key, value))
+        # print_sorted_dict(sorted_dict)
 
 
 def count_words(subreddit, word_list, after=None, counted={}, temp=0):
